@@ -9,20 +9,9 @@ from database import db
 
 app = FastAPI()
 
-@app.get("/")
-def root():
-    return {"Hello"" Please use /api/v1/users" +
-            " GET  to see list of user" +
-            " POST to add new user" +
-            " DELETE to remove  user by id" 
-    }
+#Chek and add data to user 
 
-@app.get("/api/v1/users")
-async def fetch_users():
-    return db
-
-@app.post("/api/v1/users")
-async def register_user(user: User):
+def user_chek (user):
     if not user.id: 
         user.id =uuid4() 
     if not user.gender:
@@ -33,7 +22,39 @@ async def register_user(user: User):
             user.first_name = r["first_name"]
         if not user.last_name:
             user.last_name = r["last_name"]
-    db.append(user)
+    return user
+
+
+
+
+@app.get("/")
+def root():
+    return {"Hello"" Please use /api/v1/users" +
+            " GET  to see list of user" +
+            " POST to add new user" +
+            " POST /api/v1/randomusers to add new number of random user"
+            " DELETE to remove  user by id"
+    }
+
+@app.get("/api/v1/users")
+async def fetch_users():
+    return db
+
+@app.post("/api/v1/users/random")
+async def random_users(num:int):
+    ids = []
+    for x in range(num):
+        us = User()
+        us = (user_chek(us))
+        db.append(us)
+        ids.append(us.id)   
+    return  ids 
+    
+
+
+@app.post("/api/v1/users")
+async def register_user(user: User):
+    db.append(user_chek(user))
     return {"id": user.id}
 
 @app.delete("/api/v1/users/{user_id}")

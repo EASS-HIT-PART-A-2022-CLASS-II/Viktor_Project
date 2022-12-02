@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional ,List
 from pydantic import BaseModel
-from uuid import UUID, uuid4
+from uuid import UUID
 
 
 class Gender(str,Enum):
