@@ -1,9 +1,7 @@
 from enum import Enum
-import random
-from time import gmtime
-
 from typing import Optional ,List
 from pydantic import BaseModel
+from uuid import UUID, uuid4
 
 
 class Gender(str,Enum):
@@ -16,10 +14,11 @@ class Role(str,Enum):
     
 
 class User(BaseModel):
-    id: Optional[int] = random.randint(100000, 999900);
-    first_name: str
-    last_name: str
-    middle_name: Optional[str]
-    gender: Gender
+    id: Optional[UUID]
+    first_name: Optional[str] 
+    last_name: Optional[str]  
+    gender: Optional[Gender]
     roles: Optional[List[Role]] = [Role.user]
+
+
 
