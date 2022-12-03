@@ -40,6 +40,10 @@ def root():
 async def fetch_users():
     return db
 
+@app.get("/api/v1/users/number")
+async def fetch_users():
+    return len(db) 
+
 @app.post("/api/v1/users/random")
 async def random_users(num:int):
     ids = []
@@ -65,7 +69,7 @@ async def delete_user(user_id: UUID):
             return
     raise HTTPException(
         status_code = 404,
-        detail = f"user with id: {user_id} does not found"
+        detail = f"user with id: {user_id} does not exists"
     )
 
 

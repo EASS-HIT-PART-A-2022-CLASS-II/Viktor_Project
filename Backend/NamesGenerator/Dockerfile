@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 90
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "90"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
