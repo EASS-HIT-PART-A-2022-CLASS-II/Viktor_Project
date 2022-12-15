@@ -17,7 +17,7 @@ def user_chek (user):
     if not user.gender:
         user.gender =  random.choice(list(Gender)) 
     if not user.first_name or not user.last_name: 
-        r = requests.get(url = 'http://localhost:8080/api/names').json()
+        r = requests.get(url = '172.17.0.2:8080/api/names').json()
         if not user.first_name:
             user.first_name = r["first_name"]
         if not user.last_name:
@@ -74,4 +74,4 @@ async def delete_user(user_id: UUID):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=80)

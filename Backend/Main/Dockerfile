@@ -1,12 +1,10 @@
-FROM python:3.9
+FROM python:3.9-slim
 
-RUN pip install requests
-RUN pip install fastapi
-RUN pip install "uvicorn[standard]"
 
-WORKDIR /app
+WORKDIR /Main
 COPY . .
 
-EXPOSE 80
+
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+
