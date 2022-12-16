@@ -3,7 +3,7 @@
 Simple project that uses  microservises with API request That allows you to manage workers
 
 
-Fromtend  --> backend.Main --> NamesGenerator 
+Frontend  --> backend.Main --> NamesGenerator 
 
 
 
@@ -33,6 +33,7 @@ HOW TO RUN
 5. Connect both images to the network
     
     docker network connect net server 
+    
     docker network connect net app     
 
 6. Congratulations  you can now manage worker Database     
