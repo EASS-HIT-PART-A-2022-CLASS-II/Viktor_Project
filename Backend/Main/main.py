@@ -17,12 +17,13 @@ def user_chek (user):
     if not user.gender:
         user.gender =  random.choice(list(Gender)) 
     if not user.first_name or not user.last_name: 
-        r = requests.get(url = '172.17.0.2:8080/api/names').json()
+        r = requests.get(url = 'http://app:8080/api/names').json()
         if not user.first_name:
             user.first_name = r["first_name"]
         if not user.last_name:
             user.last_name = r["last_name"]
     return user
+
 
 
 
