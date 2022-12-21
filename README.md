@@ -16,7 +16,7 @@ HOW TO RUN
 
 2. Run Ducker as 
     
-    docker run -ti -p80:8001 --name server  server
+    docker run -ti -p80:80 --name server  server
 
 3. Build main from NamesGenerator/main.py   
     
