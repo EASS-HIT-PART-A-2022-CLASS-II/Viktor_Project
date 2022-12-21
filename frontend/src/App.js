@@ -6,6 +6,14 @@ import React from 'react';
 function App() {
   
   const  [users, setUsers] = React.useState([])
+  const [name, setName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [user, setUser] = React.useState(false);
+  const [admin , setAdmin] = React.useState(false);
+  const [gender , setGender] = React.useState();
+
+
+
   function getUsers(){
     axios.get('http://localhost:80/api/v1/users')
   .then(function (response) {
@@ -29,7 +37,7 @@ function App() {
   })
   }
   function createRandomUser(){
-    axios.post('http://localhost:80/api/v1/users/random' + '?num=1')
+    axios.post('http://localhost:80/api/v1/users/random?num=1')
   .then(function (response) {
     getUsers();
   console.log(response);
@@ -38,37 +46,34 @@ function App() {
   
   console.log(error);
   })
+
   }
   function createNewUser(){
-    function handleFormSubmit(event) {
-      // Prevent the form from reloading the page
-      event.preventDefault();
-    
-      // Get the form data
-      const firstName = document.getElementById('first-name').value;
-      const lastName = document.getElementById('last-name').value;
-      const gender = document.querySelector('input[name="gender"]:checked').value;
-      const roles = [];
-      const roleElements = document.querySelectorAll('input[name="roles"]:checked');
-      for (let i = 0; i < roleElements.length; i++) {
-        roles.push(roleElements[i].value);
-      }
+    console.log("User is Created")
+    let roles = [];
+    if(admin) roles.push('admin')
+    if(user) roles.push('user')
+    console.log(roles)
+  
 
-      // Create a JSON object with the form data
-      const userData = {
-        "first_name": firstName,
-        "last_name": lastName,
-        "gender": gender,
-        "roles": roles
-      };
+    const userData = {
+      "first_name": name,
+      "last_name": lastName,
+      "gender": gender,
+    };
+    if(roles !== []){userData.roles = roles}
+
     
-      // Add the data to the JSON file
-      // TODO: Add code here to write the userData object to a JSON file
+    console.log(userData.first_name);
+    axios.post('http://localhost:80/api/v1/users',userData)
+    .then(function (response) {
+      getUsers();
+    console.log(response);
+    })
+    .catch(function (error) {
     
-      // Clear the form
-      event.target.reset();
-    }
-    
+    console.log(error);
+    })
 
   }
 
@@ -87,25 +92,28 @@ function App() {
         onClick={()=> createRandomUser()
         }
         >Random</button>
-        <form id="user-form">
+        <form id="user-form" onSubmit={(e) => {e.preventDefault(); createNewUser(); e.target.reset()}}>
           <label for="first-name">First Name:</label><br/>
-          <input type="text" id="first-name" name="first-name"/><br/>
+          <input onChange = {(e) => {setName(e.target.value)}} value = {name} type="text" /><br/>
           <label for="last-name">Last Name:</label><br/>
-          <input type="text" id="last-name" name="last-name"/><br/>
+          <input onChange = {(e) => {setLastName(e.target.value)}} value = {lastName} type="text" /><br/>
           <label for="gender">Gender:</label><br/>
-          <input type="radio" id="male" name="gender" value="male"/> Male<br/>
-          <input type="radio" id="female" name="gender" value="female"/> Female<br/>
+          <input type="radio" onChange ={e => {setGender('male'); }} checked={gender === 'male'}/> Male<br/>
+          <input type="radio"onChange={e => setGender('female')} checked={gender === 'female'}/> Female<br/>
           <label for="roles">Roles:</label><br/>
-          <input type="checkbox" id="user" name="roles" value="user"/> User<br/>
-          <input type="checkbox" id="admin" name="roles" value="admin"/> Admin<br/>
-          <input type="submit" value="Submit"/>
+          <input type="checkbox" defaultChecked={user} onChange={e => {setUser(e.target.value);}} checked={user}  /> User<br/>
+          <input type="checkbox" onChange={e => {setAdmin(e.target.value);}} checked={admin}/> Admin<br/>
+          <button type="submit">Submit</button>
         </form> 
         <div className='displayUsers'>{users.map(user => {
           return <div key={user.id} >
             <p className='userId'>ID : {user.id} </p>
             <p className='userName'>Name : {user.first_name}  {user.last_name}</p>
+            <p className='userName'>Role : {user.roles[0]} {user.roles[1]}  </p>
             <button
-            onClick={()=> deleteUser(user.id)
+            onClick={(e)=> { 
+              deleteUser(user.id);
+              }
             }
             >delete</button>
             
