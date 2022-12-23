@@ -27,7 +27,9 @@ def user_chek (user):
     if not user.id: 
         user.id =uuid4() 
     if not user.gender:
-        user.gender =  random.choice(list(Gender)) 
+        user.gender =  random.choice(list(Gender))
+    if user.roles == []:
+        user.reles.append('user')
     if not user.first_name or not user.last_name: 
         r = requests.get(url = 'http://app:8080/api/names').json()
         if not user.first_name:

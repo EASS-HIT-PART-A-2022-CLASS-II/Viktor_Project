@@ -11,14 +11,18 @@ function App() {
   const [user, setUser] = React.useState(false);
   const [admin , setAdmin] = React.useState(false);
   const [gender , setGender] = React.useState();
+  const [count, setCount] =React.useState();
 
+
+  
 
 
   function getUsers(){
     axios.get('http://localhost:80/api/v1/users')
   .then(function (response) {
-      setUsers(response.data)
-    console.log(response);
+      setUsers(response.data);
+      showNumer();
+      console.log(response);
   })
   .catch(function (error) {
     
@@ -74,6 +78,13 @@ function App() {
     
     console.log(error);
     })
+  }
+  function showNumer(){
+    axios.get('http://localhost:80/api/v1/users/number')
+    .then(function (response) 
+    {console.log(response);
+      setCount(response.data);
+  })
 
   }
 
@@ -84,18 +95,20 @@ function App() {
         <p>
           Viktor Project
         </p>
+        
+        <div className='userCounter'type="text" > Users in DB: {count} <p></p></div>
         <button
         onClick={()=> getUsers()
         }
-        >Display</button>
+        >Display</button><br></br>
         <button
         onClick={()=> createRandomUser()
         }
         >Random</button>
-        <form id="user-form" onSubmit={(e) => {e.preventDefault(); createNewUser(); e.target.reset()}}>
-          <label for="first-name">First Name:</label><br/>
+        <form  className='userForm' id="user-form" onSubmit={(e) => {e.preventDefault(); createNewUser(); setAdmin(false); setLastName(""); setName("")}}>
+          <label for="first-name">First Name: </label>
           <input onChange = {(e) => {setName(e.target.value)}} value = {name} type="text" /><br/>
-          <label for="last-name">Last Name:</label><br/>
+          <label for="last-name">Last Name: </label>
           <input onChange = {(e) => {setLastName(e.target.value)}} value = {lastName} type="text" /><br/>
           <label for="gender">Gender:</label><br/>
           <input type="radio" onChange ={e => {setGender('male'); }} checked={gender === 'male'}/> Male<br/>
@@ -109,7 +122,7 @@ function App() {
           return <div key={user.id} >
             <p className='userId'>ID : {user.id} </p>
             <p className='userName'>Name : {user.first_name}  {user.last_name}</p>
-            <p className='userName'>Role : {user.roles[0]} {user.roles[1]}  </p>
+            <p className='userName'>Role : {user.roles[0]} {user.roles[1]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Gender: {user.gender} </p>
             <button
             onClick={(e)=> { 
               deleteUser(user.id);
