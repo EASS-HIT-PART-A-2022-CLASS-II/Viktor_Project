@@ -1,8 +1,8 @@
 # Viktor_Project
 
-#Worker Management Microservices
+# Worker Management Microservices
 
-##This project uses microservices with API requests to allow you to manage workers. 
+## This project uses microservices with API requests to allow you to manage workers. 
 You can : 
 
 -delete
@@ -14,7 +14,7 @@ The project works with Docker and contains two microservices: two for the backen
 
 The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information.
 
-##Diagram:
+## Diagram:
 
 ***************************************************************************
     +------------+            +------------+
@@ -38,7 +38,7 @@ The frontend sends requests to the main service, and if needed, the main service
 
 *******************************************************
 
-##Running the project
+## Running the project
 
 - Clone the repository and navigate to the project directory
 
