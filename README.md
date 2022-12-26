@@ -6,13 +6,19 @@
 You can : 
 
 -delete
+
 -add random
+
 -show
+
 -create users with missing information
 
-The project works with Docker and contains two microservices: two for the backend and one for the frontend, which is built with React.
+The project works with Docker and contains two microservices: 
+
+two for the backend and one for the frontend, which is built with React.
 
 The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information.
+
 
 ## Diagram:
 
