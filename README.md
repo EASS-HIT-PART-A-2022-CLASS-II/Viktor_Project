@@ -2,8 +2,9 @@
 
 # Worker Management Microservices
 
-## This project uses microservices with API requests to allow you to manage workers. 
-You can : 
+### This project uses microservices with API requests to allow you to manage workers. 
+
+### You can : 
 
 -delete
 
@@ -13,7 +14,8 @@ You can :
 
 -create users with missing information
 
-The project works with Docker and contains two microservices: 
+
+### The project works with Docker and contains two microservices: 
 
 two for the backend and one for the frontend, which is built with React.
 
