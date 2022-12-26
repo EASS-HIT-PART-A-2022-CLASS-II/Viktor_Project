@@ -1,39 +1,43 @@
 # Viktor_Project
+Worker Management Microservices
 
-Simple project that uses  microservises with API request That allows you to manage workers
+This project uses microservices with API requests to allow you to manage workers. 
+You can : delete, add random, show, and create users with missing information.
 
+The project works with Docker and contains two microservices: two for the backend and one for the frontend, which is built with React.
 
-Frontend  --> backend.Main --> NamesGenerator 
+The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information.
 
+Diagram:
 
+***************************************************************************
+    +------------+            +------------+
+    |            |            |            |
+    |  Frontend  |            |    Main    |
+    |            |            |            |
+    +------------+            +------------+
+          |                         |
+          | API request             |  API request
+          |                         |
+          +-------------------------+
+                                    |
+                                    | API request
+                                    |
+                                    v
+                         +----------------+
+                         |                |
+                         | NamesGenerator |
+                         |                |
+                         +----------------+
 
-******************
-HOW TO RUN 
+*******************************************************
 
-1. Build main from Backend/main.py   
-   
-   docker build -t server  .
+Running the project
 
-2. Run Ducker as 
-    
-    docker run -ti -p80:80 --name server  server
+1.Clone the repository and navigate to the project directory
 
-3. Build main from NamesGenerator/main.py   
-    
-    docker build -t app  .
+2.Build and start the docker containers: docker-compose up
 
-4. Run Docker as 
-    
-    docker run -ti -p8080:8080 --name app  app
+This will start the backend and frontend services in separate containers. 
 
-4. Create nework
-    
-    docker network create net 
-
-5. Connect both images to the network
-    
-    docker network connect net server 
-    
-    docker network connect net app     
-
-6. Congratulations  you can now manage worker Database     
+The frontend will be available at http://localhost:3000
