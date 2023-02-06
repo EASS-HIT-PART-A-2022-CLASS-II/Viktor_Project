@@ -37,8 +37,21 @@ def user_chek (user):
             user.first_name = r["first_name"]
         if not user.last_name:
             user.last_name = r["last_name"]
+    if not user.password or not passwordCheck(user.password):
+        password_response = requests.get(url = 'http://passwordgenerator:50/api/v1/passwords').json()
+        user.password = password_response['password']        
     return user
 
+def passwordCheck(password):
+    if not any(char.isupper() for char in password):
+        return False
+    if not any(char.isdigit() for char in password):
+        return False
+    if not any(not char.isalnum() for char in password):
+        return False
+    if len(password) < 8 or len(password) > 16:
+        return False
+    return True 
 
 
 @app.get("/")

@@ -8,12 +8,15 @@ db: List[User] = [
         first_name="jam",
         last_name="Ahmed",
         gender= Gender.female,
-        roles=[Role.user]
+        roles=[Role.user],
+        password="Qaz123!"
+
     ),
     User(id = "e18ac920-08d9-4c90-9c24-154eda4a48d6",
         first_name="Alex",
         last_name="Jines",
         gender= Gender.male,
-        roles=[Role.admin,Role.user]
+        roles=[Role.admin,Role.user],
+        password="Qaz123!"
     )
 ]

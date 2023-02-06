@@ -19,6 +19,18 @@ services:
       - "8080:8080"
     networks:
         - app-network
+
+
+  passwordgenerator:
+    build: /backend/password/
+    command: uvicorn main:app --host 0.0.0.0 --port 50
+    container_name: password
+    ports:
+       - "50:50"
+    networks:
+         - app-network
+
+
         
 
   react:

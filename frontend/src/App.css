@@ -23,8 +23,12 @@
 
 .userId{
   color:aqua;
-  
 }
+
+.userPassword{
+  color:burlywood
+}
+
 
 .displayUsers{
   
@@ -43,4 +47,24 @@
   font-size: 20px;
   color:aqua;
 
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th, td {
+  border: 1px solid rgb(4, 28, 115);
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1e55a6;
+}
+
+tr:nth-child(even) {
+  background-color: #1e55a6;
 }

@@ -19,6 +19,7 @@ class User(BaseModel):
     last_name: Optional[str]  
     gender: Optional[Gender]
     roles: Optional[List[Role]] = [Role.user]
+    password: Optional[str] 
 
 
 
