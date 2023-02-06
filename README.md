@@ -2,6 +2,14 @@
 
 # Worker Management Microservices
 
+
+
+
+https://user-images.githubusercontent.com/70378430/216985667-f5f094f1-cc19-4c14-a778-c796f8238a2f.mp4
+
+
+
+
 ### This project uses microservices with API requests to allow you to manage workers. 
 
 ### You can : 
@@ -15,27 +23,26 @@
 -create users with missing information
 
 
-### The project works with Docker and contains two microservices: 
+### The project works with Docker and contains three microservices: 
 
-two for the backend and one for the frontend, which is built with React.
+three for the backend and one for the frontend, which is built with React.
 
-The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information.
+The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information. (such as  Password,role or Name)
 
 
 ## Diagram:
 
 ***************************************************************************
-    +------------+            +------------+
-    |            |            |            |
-    |  Frontend  |            |    Main    |
-    |            |            |            |
-    +------------+            +------------+
-          |                         |
-          | API request             |  API request
-          |                         |
-          +-------------------------+
+    +------------+            +------------+           +------------+ 
+    |            |API request |            |API request|            |
+    |  Frontend  |- - - - - > |    Main    |- - - - - >|  Password  |
+    |            |            |            |           |            |
+    +------------+            +------------+           +------------+
                                     |
-                                    | API request
+                                    |  API request
+                                    |
+                                    |
+                                    | 
                                     |
                                     v
                          +----------------+
