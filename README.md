@@ -1,27 +1,48 @@
 # Viktor_Project
-Worker Management Microservices
 
-This project uses microservices with API requests to allow you to manage workers. 
-You can : delete, add random, show, and create users with missing information.
+# Worker Management Microservices
 
-The project works with Docker and contains two microservices: two for the backend and one for the frontend, which is built with React.
 
-The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information.
 
-Diagram:
+
+https://user-images.githubusercontent.com/70378430/216985667-f5f094f1-cc19-4c14-a778-c796f8238a2f.mp4
+
+
+
+
+### This project uses microservices with API requests to allow you to manage workers. 
+
+### You can : 
+
+-delete
+
+-add random
+
+-show
+
+-create users with missing information
+
+
+### The project works with Docker and contains three microservices: 
+
+three for the backend and one for the frontend, which is built with React.
+
+The frontend sends requests to the main service, and if needed, the main service can send API requests to the second service if there is missing information. (such as  Password,role or Name)
+
+
+## Diagram:
 
 ***************************************************************************
-    +------------+            +------------+
-    |            |            |            |
-    |  Frontend  |            |    Main    |
-    |            |            |            |
-    +------------+            +------------+
-          |                         |
-          | API request             |  API request
-          |                         |
-          +-------------------------+
+    +------------+            +------------+           +------------+ 
+    |            |API request |            |API request|            |
+    |  Frontend  |- - - - - > |    Main    |- - - - - >|  Password  |
+    |            |            |            |           |            |
+    +------------+            +------------+           +------------+
                                     |
-                                    | API request
+                                    |  API request
+                                    |
+                                    |
+                                    | 
                                     |
                                     v
                          +----------------+
@@ -32,11 +53,11 @@ Diagram:
 
 *******************************************************
 
-Running the project
+## Running the project
 
-1.Clone the repository and navigate to the project directory
+- Clone the repository and navigate to the project directory
 
-2.Build and start the docker containers: docker-compose up
+- Build and start the docker containers: docker-compose up
 
 This will start the backend and frontend services in separate containers. 
 
